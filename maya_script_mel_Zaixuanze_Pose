@@ -1,0 +1,196 @@
+global proc zaixuanobj(){
+global string $seleobj[];
+$seleobj = `ls -sl`;
+string $itemsB[] = `textScrollList -q -si myScrollLisB`;
+    select -cl;
+    for ( $a in $itemsB ){
+        string $bufferB[];
+        tokenize $a "-" $bufferB;
+        select -add $bufferB[0];
+    }
+}
+//////////
+global proc Zaixuanze(){
+global string $seleobj[];
+if( `window -q -ex winB` ){deleteUI winB;}
+window -t "ListB_C+F11" winB;
+columnLayout -w 310 -adj 1;
+
+frameLayout -l ("numB> " + size(`ls -sl`)) -w 310;
+textScrollList -ams true -sc "zaixuanobj()" myScrollLisB;
+for($a in `ls-sl`){textScrollList -e -a $a myScrollLisB;}
+//
+global string $ref_AInputField[1];
+$ref_AInputField[1]=`textField`;
+rowLayout -nc 8;
+button -l "sele+xx" -c sele_ref_A;
+button -l "sele-xx" -c sele_ref_B;
+setParent ..;
+showWindow winB;
+}//Zaixuanze;
+
+///////
+global proc sele_ref_A(){
+//sele obj>+"xxx:"
+string $ref_A[] = `ls-sl`;
+select -cl;
+global string $ref_AInputField[1];
+string $refmodf = `textField -q -tx $ref_AInputField[1]`;
+int $ref_Ashuliang =`size($ref_A)`;
+int $x;
+for ($x = 0;$x < $ref_Ashuliang; $x++){
+select -tgl ($refmodf+$ref_A[$x]);
+}
+}
+/////
+global proc sele_ref_B(){
+//sele obj>-"xxx:"
+string $seleobj[] = `ls-sl`;
+select -cl;
+global string $ref_AInputField[1];
+string $refmodf = `textField -q -tx $ref_AInputField[1]`;
+int $ref_Ashuliang =`size($seleobj)`;
+int $x;
+for ($x = 0;$x < $ref_Ashuliang; $x++){
+string $checkname=$seleobj[$x];
+string $characterN=substituteAllString($checkname, $refmodf, "");
+select -tgl $characterN;
+}
+}
+
+///////////////////////////////////////////////////////////////////////
+global proc posetoshelf(){
+	if(`window -ex custButtonWin`){deleteUI custButtonWin;}
+	else if(`windowPref -ex custButtonWin`){windowPref -r custButtonWin;}
+	window 
+		-w 200
+		-title ("p2s") 
+		-s 0 custButtonWin;
+	columnLayout; 
+	text "Optional Label:";
+	textField 
+	-w 100
+	"_custButtonWin";
+	button 
+	-h 35
+	-w 100
+	-ann "Save Selected Node's \"setAttr\" Commands to a Shelf Button."
+	-label "posetoshelf."
+	-c ("saveSelectedNodeAttrsToShelf( `textField -q -tx _custButtonWin` );");
+	text "Or";
+	button 
+	-w 100
+	-ann "Save Current Selection's Selection Commands as a Shelf Button."
+	-label "selection2shelf."
+	-c ("saveNodeSelectionToShelf( `textField -q -tx _custButtonWin` );");
+	button 
+	-w 100
+	-ann "Save Current Selection's Selection Commands as a Shelf Button."
+	-label "sonnnn."
+	-c sonnnn;
+	showWindow;
+}
+global proc sonnnn(){
+kakusiONs;
+SATN_Execsss;
+CurveOperation onekeyselect;
+if(`keyframe -an keys -q -kc`!=0){
+CurveOperation Key_selobj;$createSetResult = `sets -name "X__Check_thisGrouppp"`;
+}else{select -cl;print ("\n>>>CurrentTime Pose Check OKKKKK_nokey<<<\n");}
+kakusiOFFs;}
+
+global proc string saveSelectedNodeAttrsToShelf(string $label){
+	string $selected[] = `ls -sl`;
+	if( !`size($selected)` ){
+		warning "Nothing is currently selected. No shelf button created, or action taken.";
+		return "Nothing is currently selected. No shelf button created, or action taken.";	
+	}
+	string $safeShelfCommand;
+	for ($node in $selected){
+		string $keyableAttrs[] = `listAttr -r -w -k -u -v -m -s $node`;
+		if ( !`size($keyableAttrs)`){
+			continue;	
+		} 
+		for ($attr in $keyableAttrs)
+		{
+			string $value = string ( `getAttr ($node+"."+$attr)` );
+			$safeShelfCommand = ("catch (`setAttr \""+$node +"."+$attr+"\" "+$value+"`);\n")+$safeShelfCommand;
+		}
+	}
+	global string $gShelfTopLevel;
+	if(`tabLayout -exists $gShelfTopLevel`){
+		print "\n\n\n";	
+		print "// Set Attribute commands put into shelf: \n\n";
+		print $safeShelfCommand;
+		print "\n";
+		if ($label == ""){ $label = "pose.";  }
+		shelfButton
+			-parent ($gShelfTopLevel + "|" + `tabLayout -q -st $gShelfTopLevel`)
+			-enableCommandRepeat 1
+			-enable 1
+			-width 34
+			-height 34
+			-manage 1
+			-visible 1
+			-annotation $label
+			-label $label 
+			-iol $label
+			-image1 "menuIconCharacters.xpm" 
+			-style "iconOnly" 
+			-command $safeShelfCommand;
+	}else{
+		error "You need a visible shelf for this work, dude!  Show your shelf, man!";
+	}return $safeShelfCommand;
+}
+global proc string saveNodeSelectionToShelf(string $label){
+	string $selected[] = `ls -sl`;
+	if( !`size($selected)` ){
+		warning "Nothing is currently selected. No shelf button created, or action taken.";
+		return "Nothing is currently selected. No shelf button created, or action taken.";	
+	}
+	string $safeShelfCommand;
+	for ($node in $selected)
+	{
+		$safeShelfCommand = ("catch (`select -add \""+$node+"\"`);\n")+$safeShelfCommand;
+	}
+	$safeShelfCommand = "select -cl;\n"+$safeShelfCommand;
+	global string $gShelfTopLevel;
+	if(`tabLayout -exists $gShelfTopLevel`){
+		print "\n\n\n";	
+		print "// Selection commands put into shelf: \n\n";
+		print $safeShelfCommand;
+		print "\n";
+		if ($label == ""){ $label = "select.";  }
+		shelfButton
+			-parent ($gShelfTopLevel + "|" + `tabLayout -q -st $gShelfTopLevel`)
+			-enableCommandRepeat 1
+			-enable 1
+			-width 34
+			-height 34
+			-manage 1
+			-visible 1
+			-annotation $label
+			-label $label 
+			-iol $label
+			-image1 "aselect.xpm" 
+			-style "iconOnly" 
+			-command $safeShelfCommand;
+	}else{
+		error "You need a visible shelf for this work, dude!  Show your shelf, man!";
+	}
+	return $safeShelfCommand;
+}
+global proc install_posetoshelf(){
+	global string $gShelfTopLevel;
+	if(`tabLayout -exists $gShelfTopLevel`){
+		shelfButton
+		-parent ($gShelfTopLevel + "|" + `tabLayout -q -st $gShelfTopLevel`)
+		-label "p2s"
+		-iol "p2s"
+		-command "posetoshelf"
+		-image1 "menuiconcopy.xpm"
+		-annotation "Quickly and easily label and save selected pose or selection commands for characters and controls as re-usable shelf buttons.";
+	}else{
+		error "You need a shelf for this Install to complete!  Show your shelf, man!";
+	}
+}install_posetoshelf;
