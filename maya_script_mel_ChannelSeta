@@ -1,0 +1,100 @@
+global proc ChannelSeta() {
+if(`window -ex quickchannelw` == true )deleteUI quickchannelw;
+window -t "channel" -w 50 -h 100 quickchannelw;
+columnLayout;
+text "lock";
+rowLayout -nc 4;
+shelfButton -h 30 -st "textOnly" -l "  tx " -c Ltx -dcc unLtx;
+shelfButton -h 30 -st "textOnly" -l " ty " -c Lty -dcc unLty;
+shelfButton -h 30 -st "textOnly" -l " tz " -c Ltz -dcc unLtz;
+shelfButton -h 30 -st "textOnly" -l "    xyz    " -c "Ltx;Lty;Ltz;" -dcc "unLtx;unLty;unLtz;";
+setParent ..;
+rowLayout -nc 4;
+shelfButton -h 30 -st "textOnly" -l "  rx " -c Lrx -dcc unLrx;
+shelfButton -h 30 -st "textOnly" -l " ry " -c Lry -dcc unLry;
+shelfButton -h 30 -st "textOnly" -l " rz " -c Lrz -dcc unLrz;
+shelfButton -h 30 -st "textOnly" -l "    xyz    " -c "Lrx;Lry;Lrz;" -dcc "unLrx;unLry;unLrz;";
+setParent ..;
+rowLayout -nc 4;
+shelfButton -h 30 -st "textOnly" -l "  sx " -c Lsx -dcc unLsx;
+shelfButton -h 30 -st "textOnly" -l " sy " -c Lsy -dcc unLsy;
+shelfButton -h 30 -st "textOnly" -l " sz " -c Lsz -dcc unLsz;
+shelfButton -h 30 -st "textOnly" -l "   xyz    " -c "Lsx;Lsy;Lsz;" -dcc "unLsx;unLsy;unLsz;";
+setParent ..;
+rowLayout -nc 2;
+shelfButton -h 20 -st "textOnly" -l "    ----v----" -c Lvis -dcc unLvis;
+shelfButton -h 20 -st "textOnly" -l "       all" -c allLo -dcc allunLo;
+setParent ..;
+separator -style "out" -w 128 -h 4;
+text "hide";
+rowLayout -nc 4;
+shelfButton -h 30 -st "textOnly" -l "  tx " -c Htx -dcc unHtx;
+shelfButton -h 30 -st "textOnly" -l " ty " -c Hty -dcc unHty;
+shelfButton -h 30 -st "textOnly" -l " tz " -c Htz -dcc unHtz;
+shelfButton -h 30 -st "textOnly" -l "    xyz    " -c "Htx;Hty;Htz;" -dcc "unHtx;unHty;unHtz;";
+setParent ..;
+rowLayout -nc 4;
+shelfButton -h 30 -st "textOnly" -l "  rx " -c Hrx -dcc unHrx;
+shelfButton -h 30 -st "textOnly" -l " ry " -c Hry -dcc unHry;
+shelfButton -h 30 -st "textOnly" -l " rz " -c Hrz -dcc unHrz;
+shelfButton -h 30 -st "textOnly" -l "    xyz    " -c "Hrx;Hry;Hrz;" -dcc "unHrx;unHry;unHrz;";
+setParent ..;
+rowLayout -nc 4;
+shelfButton -h 30 -st "textOnly" -l "  sx " -c Hsx -dcc unHsx;
+shelfButton -h 30 -st "textOnly" -l " sy " -c Hsy -dcc unHsy;
+shelfButton -h 30 -st "textOnly" -l " sz " -c Hsz -dcc unHsz;
+shelfButton -h 30 -st "textOnly" -l "   xyz    " -c "Hsx;Hsy;Hsz;" -dcc "unHsx;unHsy;unHsz;";
+setParent ..;
+rowLayout -nc 2;
+shelfButton -h 20 -st "textOnly" -l "    ----v----" -c Hvis -dcc unHvis;
+shelfButton -h 20 -st "textOnly" -l "       all" -c allHi -dcc allunHi;
+setParent ..;
+
+showWindow quickchannelw;
+}
+
+global proc Ltx(){setAttr -lock 1 ".tx";}
+global proc Lty(){setAttr -lock 1 ".ty";}
+global proc Ltz(){setAttr -lock 1 ".tz";}
+global proc Lrx(){setAttr -lock 1 ".rx";}
+global proc Lry(){setAttr -lock 1 ".ry";}
+global proc Lrz(){setAttr -lock 1 ".rz";}
+global proc Lsx(){setAttr -lock 1 ".sx";}
+global proc Lsy(){setAttr -lock 1 ".sy";}
+global proc Lsz(){setAttr -lock 1 ".sz";}
+global proc Lvis(){setAttr -lock 1 ".v";}
+global proc unLtx(){setAttr -lock 0 ".tx";}
+global proc unLty(){setAttr -lock 0 ".ty";}
+global proc unLtz(){setAttr -lock 0 ".tz";}
+global proc unLrx(){setAttr -lock 0 ".rx";}
+global proc unLry(){setAttr -lock 0 ".ry";}
+global proc unLrz(){setAttr -lock 0 ".rz";}
+global proc unLsx(){setAttr -lock 0 ".sx";}
+global proc unLsy(){setAttr -lock 0 ".sy";}
+global proc unLsz(){setAttr -lock 0 ".sz";}
+global proc unLvis(){setAttr -lock 0 ".v";}
+global proc allLo(){Ltx;Lty;Ltz;Lrx;Lry;Lrz;Lsx;Lsy;Lsz;Lvis;}
+global proc allunLo(){unLtx;unLty;unLtz;unLrx;unLry;unLrz;unLsx;unLsy;unLsz;unLvis;}
+//
+global proc Htx(){setAttr -keyable 0 -channelBox 0 ".tx";Ltx;}
+global proc Hty(){setAttr -keyable 0 -channelBox 0 ".ty";Lty;}
+global proc Htz(){setAttr -keyable 0 -channelBox 0 ".tz";Ltz;}
+global proc Hrx(){setAttr -keyable 0 -channelBox 0 ".rx";Lrx;}
+global proc Hry(){setAttr -keyable 0 -channelBox 0 ".ry";Lry;}
+global proc Hrz(){setAttr -keyable 0 -channelBox 0 ".rz";Lrz;}
+global proc Hsx(){setAttr -keyable 0 -channelBox 0 ".sx";Lsx;}
+global proc Hsy(){setAttr -keyable 0 -channelBox 0 ".sy";Lsy;}
+global proc Hsz(){setAttr -keyable 0 -channelBox 0 ".sz";Lsz;}
+global proc Hvis(){setAttr -keyable 0 -channelBox 0 ".v";Lvis;}
+global proc unHtx(){setAttr -channelBox 1 ".tx";setAttr -keyable 1 ".tx";unLtx;}
+global proc unHty(){setAttr -channelBox 1 ".ty";setAttr -keyable 1 ".ty";unLty;}
+global proc unHtz(){setAttr -channelBox 1 ".tz";setAttr -keyable 1 ".tz";unLtz;}
+global proc unHrx(){setAttr -channelBox 1 ".rx";setAttr -keyable 1 ".rx";unLrx;}
+global proc unHry(){setAttr -channelBox 1 ".ry";setAttr -keyable 1 ".ry";unLry;}
+global proc unHrz(){setAttr -channelBox 1 ".rz";setAttr -keyable 1 ".rz";unLrz;}
+global proc unHsx(){setAttr -channelBox 1 ".sx";setAttr -keyable 1 ".sx";unLsx;}
+global proc unHsy(){setAttr -channelBox 1 ".sy";setAttr -keyable 1 ".sy";unLsy;}
+global proc unHsz(){setAttr -channelBox 1 ".sz";setAttr -keyable 1 ".sz";unLsz;}
+global proc unHvis(){setAttr -channelBox 1 ".v";setAttr -keyable 1 ".v";unLvis;}
+global proc allHi(){Htx;Hty;Htz;Hrx;Hry;Hrz;Hsx;Hsy;Hsz;Hvis;}
+global proc allunHi(){unHtx;unHty;unHtz;unHrx;unHry;unHrz;unHsx;unHsy;unHsz;unHvis;}
