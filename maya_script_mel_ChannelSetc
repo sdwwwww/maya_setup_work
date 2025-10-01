@@ -1,0 +1,52 @@
+global proc ChannelSetc() {
+if(`window -ex quickchannelcw` == true )deleteUI quickchannelcw;
+window -t "channelc" -w 50 -h 80 quickchannelcw;
+columnLayout;
+text "O-1";
+rowLayout -nc 4;
+shelfButton -h 30 -st "textOnly" -l "  tx " -c zotx -dcc oztx;
+shelfButton -h 30 -st "textOnly" -l " ty " -c zoty -dcc ozty;
+shelfButton -h 30 -st "textOnly" -l " tz " -c zotz -dcc oztz;
+shelfButton -h 30 -st "textOnly" -l "    xyz    " -c "zotx;zoty;zotz;" -dcc "oztx;ozty;oztz;";
+setParent ..;
+rowLayout -nc 4;
+shelfButton -h 30 -st "textOnly" -l "  rx " -c zorx -dcc ozrx;
+shelfButton -h 30 -st "textOnly" -l " ry " -c zory -dcc ozry;
+shelfButton -h 30 -st "textOnly" -l " rz " -c zorz -dcc ozrz;
+shelfButton -h 30 -st "textOnly" -l "    xyz    " -c "zorx;zory;zorz;" -dcc "ozrx;ozry;ozrz;";
+setParent ..;
+rowLayout -nc 4;
+shelfButton -h 30 -st "textOnly" -l "  sx " -c zosx -dcc ozsx;
+shelfButton -h 30 -st "textOnly" -l " sy " -c zosy -dcc ozsy;
+shelfButton -h 30 -st "textOnly" -l " sz " -c zosz -dcc ozsz;
+shelfButton -h 30 -st "textOnly" -l "   xyz    " -c "zosx;zosy;zosz;" -dcc "ozsx;ozsy;ozsz;";
+setParent ..;
+rowLayout -nc 4;
+shelfButton -h 30 -st "textOnly" -l "  Vis1 " -c v_on;
+shelfButton -h 30 -st "textOnly" -l "  Vis0 " -c v_off;
+setParent ..;
+showWindow quickchannelcw;
+}
+/////////////
+global proc zotx(){for($aa in `ls-sl`){setAttr ($aa+".tx") 0;}}
+global proc zoty(){for($aa in `ls-sl`){setAttr ($aa+".ty") 0;}}
+global proc zotz(){for($aa in `ls-sl`){setAttr ($aa+".tz") 0;}}
+global proc zorx(){for($aa in `ls-sl`){setAttr ($aa+".rx") 0;}}
+global proc zory(){for($aa in `ls-sl`){setAttr ($aa+".ry") 0;}}
+global proc zorz(){for($aa in `ls-sl`){setAttr ($aa+".rz") 0;}}
+global proc zosx(){for($aa in `ls-sl`){setAttr ($aa+".sx") 0;}}
+global proc zosy(){for($aa in `ls-sl`){setAttr ($aa+".sy") 0;}}
+global proc zosz(){for($aa in `ls-sl`){setAttr ($aa+".sz") 0;}}
+
+global proc oztx(){for($aa in `ls-sl`){setAttr ($aa+".tx") 1;}}
+global proc ozty(){for($aa in `ls-sl`){setAttr ($aa+".ty") 1;}}
+global proc oztz(){for($aa in `ls-sl`){setAttr ($aa+".tz") 1;}}
+global proc ozrx(){for($aa in `ls-sl`){setAttr ($aa+".rx") 1;}}
+global proc ozry(){for($aa in `ls-sl`){setAttr ($aa+".ry") 1;}}
+global proc ozrz(){for($aa in `ls-sl`){setAttr ($aa+".rz") 1;}}
+global proc ozsx(){for($aa in `ls-sl`){setAttr ($aa+".sx") 1;}}
+global proc ozsy(){for($aa in `ls-sl`){setAttr ($aa+".sy") 1;}}
+global proc ozsz(){for($aa in `ls-sl`){setAttr ($aa+".sz") 1;}}
+
+global proc v_on() {for($aa in `ls-sl`){setAttr ($aa+".visibility") 1;}}
+global proc v_off(){for($aa in `ls-sl`){setAttr ($aa+".visibility") 0;}}
