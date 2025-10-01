@@ -1,0 +1,183 @@
+commandExecuter_1
+
+PreviousTime;NextTime;
+GoToMinFrame;GoToMaxFrame;playblast;
+int $t = `timerX -startTime $gGuiStartupTime`;
+about -cd;about -ct;print ("Maya使用時間 "+($t/3600)+"時間 "+($t/60)+"分");
+/*-//nurbsSphere1 の後を nurbsCone1が30F後に追いかける
+$ct = `currentTime -q`;if($ct >= 30){
+nurbsCone1.tx = `getAttr -t ($ct - 30) nurbsSphere1.tx`;
+}else{nurbsCone1.tx = `getAttr -t 1 nurbsSphere1.tx`;}-*/
+///////////////////////////////////////////////////
+[mP][gE][rV][hG][oL][sE]
+$nowwindow=`getPanel -wf`;
+if(`getPanel -wf`==" "){}else if(`getPanel -wf`=="renderView"){
+"outlinerPanel1""scriptEditorPanel1""graphEditor1""hyperGraphPanel1""modelPanel*"
+//////////////////
+$res = `substituteAllString $text "a" "b"`;//a gai b
+searchReplaceNames "rever" "Rrever" "selected";
+////////////////////
+string $existArray[] = { "bbb" , "ccc" };
+appendStringArray($existArray, {"aaa"}, 1);print $existArray;
+////////////////////
+rehash;DeleteConstraints;repeatLast;
+////////////////////
+global int $loopf1c;
+if($loopf1c==0){$loopf1c=1;}else if($loopf1c==1){$loopf1c=0;}
+////////////////////
+inViewMessage -smg "0" -pos "topCenter" -bkc 0x00000000 -fade -fadeStayTime 500;
+////////////////////
+setKeyframe -animated 0;//= channelBoxCommand -keyall;
+setKeyframe -animated 1;//= SetKeyAnimated;
+setKeyframe -animated 1 -t 1 -t 41;//=伝染?
+setKeyframe -insert -t **;//=holdkey
+////////////////////
+system("start C:/Users/0300092530/AppData/Local/Temp/X.txt" );
+$directoryListing = system("DIR");
+//テスト例として使用するサンプルファイルを作成する
+$exampleFileName = ( `internalVar -userTmpDir` + "X.txt" );
+$fileId=`fopen $exampleFileName "w"`;
+fprint $fileId "*:ctre";//"Hello there\n";
+// Use the "load" keyword to open the file with the default app.
+//「load」キーワードを使用して、デフォルトのアプリでファイルを開きます。
+system("load " + $exampleFileName );
+string $input =`system("load " + $exampleFileName )`;// `system(type X.txt)`;????
+//////////////https://puarts.com/?pid=422
+string $output = "text test";
+system("echo "+$output+"> test.txt");
+string $input = `system(type text.txt)`;
+xxx*(1-10%)*(1-5%)=xxxx
+///////////////////////////////////////////////
+getenv "MAYA_SCRIPT_PATH";
+$matchKeyp = `findKeyframe -time $xxx -which previous $xxx`;
+$matchKeyn = `findKeyframe -time $xxx -which next $xxx`;
+selectKey -time ":";
+selectKey -clear;   selectKey -t (`currentTime -q`);
+float $allKeys[] = sort(`keyframe -q -sl`);
+playbackOptions -min $allKeys[0] -max $allKeys[(size($allKeys) -1)];
+playbackOptions -ast ($sttime-1) -aet ($edtime+1);
+int $kaishitime = `playbackOptions -q -minTime`;
+int $jieshutime = `playbackOptions -q -maxTime`;
+$tall=`playbackOptions -q -minTime`+":"+`playbackOptions -q -maxTime`;
+$nowtime = `currentTime -q`;
+Shift=1,Ctrl=4,Alt=8,def=0
+translate,rotate
+for($aa in `ls-sl`){}for($i = 0;$i<`size($sel)`;$i++){print $i;}
+float $test=0;while ($test < 5) {    $test = $test + 1;}
+string $selectedCurves[] = `keyframe -q -name`;
+string $Csss[] = `listConnections -plugs true $selectedCurves`;//真名
+$channel = $selectedCurves;
+int $selechannel=`size ($channel)`;
+$timeArray = `keyframe -selected -q -timeChange $channel`;//shijian
+$timeArraySnap = `keyframe -selected -q -valueChange $channel`;//zhi
+int $Q7akeyCount = `keyframe -an keys -q -kc`;//zhen shu liang
+$selIndices = `keyframe -selected -q -indexValue $channel`;//カーブ上第x番
+if (`keyframe -an keys -q -kc` == 1) {
+string $attr[] = `channelBox -q -sma mainChannelBox`;
+copyKey -time ($sarttime + ":" + $endtime);pasteKey;
+pasteKey -time $xxx -float $xxx -option merge ////insert>charu//merge>hebing
+-copies 1 -connect 0 -timeOffset 0 -floatOffset 0 -valueOffset 0 $xxx;
+selectKey -k -t ($FrameA+":"+$nowtime) $selectedCurves;
+
+if(`objExists surface1`){
+string $Rxyy[]={"rx","ry"};
+getAttr ($xxx[0]+".ry");
+int $zsssss=`size ($ddd)`;int $selejointshu = size( `ls -sl -type joint` );
+if(`size ($ddd)`!=0){}   if(size(`ls-sl`)==0){}
+$nowwindow=`getPanel -wf`;
+string $gew = "graphEditor1";//"renderView""hyperGraphPanel1"
+if($nowwindow==$gew){}//if(`getPanel -wf`=="renderView"){}
+string $res = substituteAllString($xx, "xx", "");
+if($plusTrue==3 || $plusTrue==4){
+int $vis=(`getAttr -lock (x+"."+x)`) ? 0 : 1;
+$OKa = ("zzz; zz; zzz;");
+-c "xxx;xx;";  igfanzhuan({"tx","ty"});
+float $tou[]=`xform -a -q -ws -t xxx`;lot;move -r -os -wd  $tou[0] $tou[1] $tou[2];
+/-*-/python "import***()";
+/-*-/mel.eval("***;")//      "\n";
+/*-
+   より大きい    >=    より大きいか、等しい    <    より小さい
+<=    より小さいか、等しい   ==    等しい     !=    等しくない
+&&    論理積（かつ）    if (a > 0 && b > 0)
+||    論理和（または）   if (a > 0 || b > 0)         
+!     否定（でない）    if (!a)
+-*    ///win+R>>%temp%
+//progressWindow -t "wait" -st "......";
+//progressWindow -ep;
+waitCursor -state on;waitCursor -state off;
+select -allDagObjects;//(-ado)
+//
+python "import time";
+python "time.sleep(170)";print "170second";
+//int $ran = rand(x);
+
+
+commandExecuter_2
+
+#http://a-s-c-e-n-s-i-o-n.blogspot.com/2015/08/maya-yuremonopy.html　#カーブずらす方法、あんまり使えない
+import sonIkplus;reload(sonIkplus)
+import sonSpline;reload(sonSpline)
+import xjAddNoizeB;reload(xjAddNoizeB);#Go_main()######
+import xjFcOffset;reload(xjFcOffset)#sel moto+ 1,2,3.... GO
+
+import pymel.core as pm
+import maya.cmds
+import pymel.core as pc
+import sys
+print(sys.version)
+from mnls import NSloopFrame
+MnlsOutputData : MnlsAnimatonTool;
+
+#"C:\Program Files\Autodesk\Maya2022\bin\maya.exe" -pythonver 2  <バッチ作成
+# Assuming that I've already imported or opened an animation file and selected the object
+python "import keyframeReduction.ui; keyframeReduction.ui.show()";
+###########################
+import bvh_importer
+bvh_importer.BVHImporterDialog()
+###########################
+
+commandExecuter_3
+
+//HideSelectedObjects;ShowSelectedObjects
+select -r A>con>B;originnone;MatchTranslation;MatchRotation;LtL_point;
+//addbake===addlotbake ??
+addselgo(3);
+//select -r 
+//tiaodian(2);tiaozhen;SSon_zaicijisuan3(0.3);
+//BaseAnimationsel;keyboard_CSAs;
+//makeAnimationlayer;fpsjinggao;
+//tiaodian(2);SSon_zaicijisuan3(0.4);
+
+//////duochongcon(1); のほうがいい？　a+b+lot go  ↓は不用加lot/堤前lot用意
+global proc yikongduoA(){//sel Lot+ a,b,c,d....>GO addaimlot後lotをまとめて制御用
+string $seltwo[]=`ls-sl`;
+if(`objExists YikongDuo`){
+////////////
+}else{
+CreateLocator;outlinecolor(001);rename "YikongDuo";
+select $seltwo YikongDuo;duochongcon(1);
+select YikongDuo ;sonbakeT;
+}
+int $cnt5 = 0;
+for($val in $seltwo){
+select YikongDuo $seltwo[$cnt5];
+originnone;LtL_point;
+$cnt5++;
+}
+select "YikongDuo*";
+gaimingzi($seltwo[0]+"_");
+}yikongduoA;
+///////////////////////////////////////////選択channle>go
+global proc keyboard_4b(){
+global string $selobj[];global string $selchan[];son;
+if(size($selchan)!=0){
+for($a in $selchan){
+int $vis=(`getAttr ($selobj[0]+"."+$a)`) ? 0 : 1;
+setAttr ($selobj[0]+"."+$a) $vis;
+}}print "{channel>0-1}";}keyboard_4b;
+///////////////////////////////////////////////////////
+proc get_pathList(){
+    string $fullPath = `file -q -sn`;print ("<<フルパス>>　:: "+$fullPath+"\n");
+    string $fileName = `file -q -sn -shn`;print ("<<ファイル名>>　:: "+$fileName+"\n");
+    string $dirName = dirname(`file -q -sn`);print ("<<ディレクトリ名>>　:: "+$dirName+"\n");  
+}get_pathList;
