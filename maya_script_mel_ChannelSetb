@@ -1,0 +1,82 @@
+global proc ChannelSetb() {
+if(`window -ex quickchannelbw` == true )deleteUI quickchannelbw;
+window -t "channelb" -w 50 -h 80 quickchannelbw;
+columnLayout;
+text "setkey";
+rowLayout -nc 4;
+shelfButton -h 30 -st "textOnly" -l "  tx " -c Ktx -dcc unKtx;
+shelfButton -h 30 -st "textOnly" -l " ty " -c Kty -dcc unKty;
+shelfButton -h 30 -st "textOnly" -l " tz " -c Ktz -dcc unKtz;
+shelfButton -h 30 -st "textOnly" -l "    xyz    " -c SetKeyTranslate -dcc "unKtx;unKty;unKtz;";
+setParent ..;
+rowLayout -nc 4;
+shelfButton -h 30 -st "textOnly" -l "  rx " -c Krx -dcc unKrx;
+shelfButton -h 30 -st "textOnly" -l " ry " -c Kry -dcc unKry;
+shelfButton -h 30 -st "textOnly" -l " rz " -c Krz -dcc unKrz;
+shelfButton -h 30 -st "textOnly" -l "    xyz    " -c SetKeyRotate -dcc "unKrx;unKry;unKrz;";
+setParent ..;
+rowLayout -nc 4;
+shelfButton -h 30 -st "textOnly" -l "  sx " -c Ksx -dcc unKsx;
+shelfButton -h 30 -st "textOnly" -l " sy " -c Ksy -dcc unKsy;
+shelfButton -h 30 -st "textOnly" -l " sz " -c Ksz -dcc unKsz;
+shelfButton -h 30 -st "textOnly" -l "   xyz    " -c SetKeyScale -dcc "unKsx;unKsy;unKsz;";
+setParent ..;
+rowLayout -nc 2;
+shelfButton -h 20 -st "textOnly" -l "    ----v----" -c Kvis -dcc unKvis;
+shelfButton -h 20 -st "textOnly" -l "       all" -c allKey -dcc allunKey;
+setParent ..;
+separator -style "out" -w 128 -h 4;
+text "fankey";
+rowLayout -nc 6;
+shelfButton -h 30 -st "textOnly" -l "  tx " -c Ftx;
+shelfButton -h 30 -st "textOnly" -l "  ty " -c Fty;
+shelfButton -h 30 -st "textOnly" -l "  tz " -c Ftz;
+shelfButton -h 30 -st "textOnly" -l "  rx " -c Frx;
+shelfButton -h 30 -st "textOnly" -l "  ry " -c Fry;
+shelfButton -h 30 -st "textOnly" -l "  rz " -c Frz;
+setParent ..;
+showWindow quickchannelbw;
+}
+/////////////
+global proc Ktx(){setKeyframe ".tx";}
+global proc Kty(){setKeyframe ".ty";}
+global proc Ktz(){setKeyframe ".tz";}
+global proc Krx(){setKeyframe ".rx";}
+global proc Kry(){setKeyframe ".ry";}
+global proc Krz(){setKeyframe ".rz";}
+global proc Ksx(){setKeyframe ".sx";}
+global proc Ksy(){setKeyframe ".sy";}
+global proc Ksz(){setKeyframe ".sz";}
+global proc Kvis(){setKeyframe ".v";}
+
+global proc unKtx(){cutKey -at "tx";}
+global proc unKty(){cutKey -at "ty";}
+global proc unKtz(){cutKey -at "tz";}
+global proc unKrx(){cutKey -at "rx";}
+global proc unKry(){cutKey -at "ry";}
+global proc unKrz(){cutKey -at "rz";}
+global proc unKsx(){cutKey -at "sx";}
+global proc unKsy(){cutKey -at "sy";}
+global proc unKsz(){cutKey -at "sz";}
+global proc unKvis(){cutKey -at "v";}
+global proc allKey(){SetKeyTranslate;SetKeyRotate;SetKeyScale;Kvis;}
+global proc allunKey(){unKtx;unKty;unKtz;unKrx;unKry;unKrz;unKsx;unKsy;unKsz;unKvis;}
+//
+
+//
+global proc channelfanzhuan(string $zhou[]){
+global string $selobj[];
+global string $mmtime;son;
+for($objb in $selobj){
+ for($ab in $zhou){
+   selectKey -k -t $mmtime ($objb + "." + $ab);
+   acktooluse(20);selectKey -clear;
+  }
+} 
+}
+global proc Ftx(){channelfanzhuan({"tx"});}
+global proc Fty(){channelfanzhuan({"ty"});}
+global proc Ftz(){channelfanzhuan({"tz"});}
+global proc Frx(){channelfanzhuan({"rx"});}
+global proc Fry(){channelfanzhuan({"ry"});}
+global proc Frz(){channelfanzhuan({"rz"});}
