@@ -1,7 +1,4 @@
-name:userPrefs_panelConfig_LF↓
-
-//Maya Preference 2024 (Release 1)
-//
+name:userPrefs_panelConfig_LF↓_SJIS
 //
 panelConfiguration -label (localizedPanelLabel("sdw2")) 
 	-userCreated true
