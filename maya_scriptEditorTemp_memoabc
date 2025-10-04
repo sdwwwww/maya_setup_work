@@ -32,7 +32,7 @@ setKeyframe -animated 1;//= SetKeyAnimated;
 setKeyframe -animated 1 -t 1 -t 41;//=伝染?
 setKeyframe -insert -t **;//=holdkey
 ////////////////////
-system("start C:/Users/0300092530/AppData/Local/Temp/X.txt" );
+system("start C:/Users/xxxxxxx/AppData/Local/Temp/X.txt" );
 $directoryListing = system("DIR");
 //テスト例として使用するサンプルファイルを作成する
 $exampleFileName = ( `internalVar -userTmpDir` + "X.txt" );
